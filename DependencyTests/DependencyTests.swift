@@ -13,13 +13,35 @@ class DependencyTests: XCTestCase {
     func testShouldResolveSampleClassA() throws {
         
         let dependencyManager = DependencyManager { manager in
-            manager.register( {
-                return SampleClassA()
+            manager.register( { () -> SampleClassA in
+                let sampleA = SampleClassA("this is sample class A")
+                return sampleA
             }, "SampleClassA")
         }
         
-        let sampleClassA = dependencyManager.resolve(label: "SampleClassA") as SampleClassA
+        let sampleClassA: SampleClassA = dependencyManager.resolve(label: "SampleClassA")
         
-        XCTAssertTrue(sampleClassA is SampleClassA)
+        XCTAssertEqual(sampleClassA.messageFromA, "this is sample class A")
+    }
+    
+    func testShouldBeAbleToResolveTwoDifferentClasses() {
+        
+        let dependencyManager = DependencyManager { manager in
+            manager.register( { () -> SampleClassA in
+                return SampleClassA("this is from sample A")
+            }, "SampleClassA")
+            
+            manager.register({ () -> SampleClassB in
+                return SampleClassB("this is from sample B")
+            }, "SampleClassB")
+        }
+        
+        let sampleA = dependencyManager.resolve(label: "SampleClassA") as SampleClassA
+        let sampleB = dependencyManager.resolve(label: "SampleClassB") as SampleClassB
+        
+        XCTAssertEqual(sampleA.messageFromA, "this is from sample A")
+        XCTAssertEqual(sampleB.messageFromB, "this is from sample B")
     }
 }
+
+
