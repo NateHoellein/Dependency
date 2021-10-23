@@ -11,6 +11,7 @@
 		B8E59CF2272448B800F6C0B2 /* Dependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E59CE7272448B800F6C0B2 /* Dependency.framework */; };
 		B8E59CF7272448B800F6C0B2 /* DependencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E59CF6272448B800F6C0B2 /* DependencyTests.swift */; };
 		B8E59CF8272448B800F6C0B2 /* Dependency.h in Headers */ = {isa = PBXBuildFile; fileRef = B8E59CEA272448B800F6C0B2 /* Dependency.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B8E59D0227244A2F00F6C0B2 /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E59D0127244A2E00F6C0B2 /* DependencyManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		B8E59CEB272448B800F6C0B2 /* Dependency.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Dependency.docc; sourceTree = "<group>"; };
 		B8E59CF1272448B800F6C0B2 /* DependencyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DependencyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E59CF6272448B800F6C0B2 /* DependencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyTests.swift; sourceTree = "<group>"; };
+		B8E59D0127244A2E00F6C0B2 /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				B8E59CEA272448B800F6C0B2 /* Dependency.h */,
+				B8E59D0127244A2E00F6C0B2 /* DependencyManager.swift */,
 				B8E59CEB272448B800F6C0B2 /* Dependency.docc */,
 			);
 			path = Dependency;
@@ -194,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8E59D0227244A2F00F6C0B2 /* DependencyManager.swift in Sources */,
 				B8E59CEC272448B800F6C0B2 /* Dependency.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,6 +402,7 @@
 		B8E59CFF272448B800F6C0B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 79D2P98PU7;
@@ -419,6 +424,7 @@
 		B8E59D00272448B800F6C0B2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 79D2P98PU7;
