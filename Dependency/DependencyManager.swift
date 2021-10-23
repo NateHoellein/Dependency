@@ -47,19 +47,4 @@ class Key: Hashable {
     }
 }
 
-class SampleClassA {
-    var messageFromA: String = ""
-    init( _ message : String) {
-        self.messageFromA = message
-        
-    }
-}
 
-class SampleClassB {
-    
-    var messageFromB: String = ""
-    
-    init(_ message: String) {
-        self.messageFromB = message
-    }
-}
