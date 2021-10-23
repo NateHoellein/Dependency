@@ -19,7 +19,7 @@ class DependencyTests: XCTestCase {
             }, "SampleClassA")
         }
         
-        let sampleClassA: SampleClassA = dependencyManager.resolve(label: "SampleClassA")
+        let sampleClassA: SampleClassA = try dependencyManager.resolve(label: "SampleClassA")
         
         XCTAssertEqual(sampleClassA.messageFromA, "this is sample class A")
     }
@@ -36,11 +36,23 @@ class DependencyTests: XCTestCase {
             }, "SampleClassB")
         }
         
-        let sampleA = dependencyManager.resolve(label: "SampleClassA") as SampleClassA
-        let sampleB = dependencyManager.resolve(label: "SampleClassB") as SampleClassB
+        let sampleA: SampleClassA = try! dependencyManager.resolve(label: "SampleClassA")
+        let sampleB: SampleClassB = try! dependencyManager.resolve(label: "SampleClassB")
         
         XCTAssertEqual(sampleA.messageFromA, "this is from sample A")
         XCTAssertEqual(sampleB.messageFromB, "this is from sample B")
+    }
+    
+    func testShouldThrowIfResolvingWhenNothingRegistered() {
+        let dependencyManager = DependencyManager()
+        
+        do {
+            _ = try dependencyManager.resolve(label: "SampleClassA") as SampleClassA
+        } catch DependencyError.RegistrationOfClassNotFound{
+            
+        } catch {
+            XCTFail("Expected a DependencyError.RegistrationOcClassNotFound")
+        }
     }
 }
 

@@ -1,4 +1,10 @@
 
+
+public enum DependencyError: Error {
+    case RegistrationOfClassNotFound
+}
+
+
 public class DependencyManager {
     
     private var dependencymap: [Key: () -> Any] = [:]
@@ -12,14 +18,14 @@ public class DependencyManager {
         dependencymap[key] = block
     }
     
-    func resolve<T>(label: String) -> T {
+    func resolve<T>(label: String) throws -> T {
         let key = Key(type: T.Type.self, label: label)
-        let b = dependencymap[key]
-        return b!() as! T
+        let initBlock = dependencymap[key]
+        guard let b = initBlock else {
+            throw DependencyError.RegistrationOfClassNotFound
+        }
+        return b() as! T
     }
-//    func resolve<T, U>( _: (T) -> U ) {
-//
-//    }
 }
 
 class Key: Hashable {
