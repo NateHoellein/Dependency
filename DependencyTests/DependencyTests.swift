@@ -94,6 +94,27 @@ class DependencyTests: XCTestCase {
         XCTAssertEqual(sampleC.classB.messageFromB, "this is from sample B")
     }
     
+    
+    func xtestHandleCircularReferences() {
+        let dependencyManager = DependencyManager { manager in
+            manager.register({ () -> ParentClass in
+                let child: ChildClass = try! manager.resolve(label: "ChildClass")
+                return ParentClass(child: child)
+            }, "ParentClass")
+            
+            manager.register({ () -> ChildClass in
+                let parent: ParentClass = try! manager.resolve(label: "ParentClass")
+                return ChildClass(parent: parent)
+            }, "ChildClass")
+        }
+        
+        let parent: ParentClass = try! dependencyManager.resolve(label: "ParentClass")
+        let child: ChildClass = try! dependencyManager.resolve(label: "ChildClass")
+        
+        XCTAssertNotNil(parent)
+        XCTAssertNotNil(child)
+    }
+    
     class SampleClassA {
         var messageFromA: String = ""
         
@@ -117,6 +138,20 @@ class DependencyTests: XCTestCase {
         init(sampleB: SampleClassB, _ message: String) {
             self.classB = sampleB
             self.messageFromC = message
+        }
+    }
+    
+    class ParentClass {
+        var child: ChildClass
+        init(child: ChildClass) {
+            self.child = child
+        }
+    }
+    
+    class ChildClass {
+        var parent: ParentClass
+        init(parent: ParentClass) {
+            self.parent = parent
         }
     }
 }
