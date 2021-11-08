@@ -1,30 +1,32 @@
 
 
 public enum DependencyError: Error {
-    case RegistrationOfClassNotFound
+    case RegistrationOfClassNotFound(String)
+    case UnableToInvokeCreationClosure(String)
 }
 
-
 public class DependencyManager {
+    private var dependencymap: [Key: (DependencyManager) -> Any] = [:]
     
-    private var dependencymap: [Key: () -> Any] = [:]
-    
-    init(_ config: (DependencyManager) -> () = { _ in }) {
+    public init(_ config: (DependencyManager) -> () = { _ in }) {
         config(self)
     }
     
-    func register<T>( _ block: @escaping () -> T, _ label: String) {
-        let key = Key(type: T.Type.self, label: label)
-        dependencymap[key] = block
+    public func register<T>(_ type:T.Type, _ block: @escaping (_ manager:DependencyManager) -> T, _ label: String) {
+        let key = Key(type: type.self, label: label)
+        self.dependencymap[key] = block
     }
     
-    func resolve<T>(label: String) throws -> T {
-        let key = Key(type: T.Type.self, label: label)
+    public func resolve<T>(_ type: T.Type, label: String) throws -> T {
+        let key = Key(type: type.self, label: label)
         let initBlock = dependencymap[key]
         guard let b = initBlock else {
-            throw DependencyError.RegistrationOfClassNotFound
+            throw DependencyError.RegistrationOfClassNotFound("Somethinge \(label)")
         }
-        return b() as! T
+        guard let bfunc = b(self) as? T else {
+            throw DependencyError.UnableToInvokeCreationClosure("Something 2 \(T.Type.self)")
+        }
+        return bfunc
     }
 }
 
