@@ -19,9 +19,7 @@ class SearchViewModel: ApiResponseDelegateProtocol {
     
     init() {
     
-        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        let manager = appDelegate.dependencyManager
-        self.apiHandler = try! (manager?.resolve(APIProtocol.self, label: "APIHandler"))!
+        self.apiHandler = try! DependencyContainer.shared.resolve(APIProtocol.self, label: "APIHandler")
         self.apiHandler.responseHandler = self
     }
     

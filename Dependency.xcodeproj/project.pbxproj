@@ -23,6 +23,7 @@
 		B8E59D5A273899C500F6C0B2 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E59D59273899C500F6C0B2 /* APIHandler.swift */; };
 		B8E59D5C27389A4400F6C0B2 /* Dependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E59CE7272448B800F6C0B2 /* Dependency.framework */; };
 		B8E59D5D27389A4400F6C0B2 /* Dependency.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B8E59CE7272448B800F6C0B2 /* Dependency.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B8E59D662741997B00F6C0B2 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E59D652741997B00F6C0B2 /* DependencyContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		B8E59D552738993500F6C0B2 /* QuickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickView.swift; sourceTree = "<group>"; };
 		B8E59D57273899BA00F6C0B2 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		B8E59D59273899C500F6C0B2 /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
+		B8E59D652741997B00F6C0B2 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				B8E59D552738993500F6C0B2 /* QuickView.swift */,
 				B8E59D57273899BA00F6C0B2 /* SearchViewModel.swift */,
 				B8E59D59273899C500F6C0B2 /* APIHandler.swift */,
+				B8E59D652741997B00F6C0B2 /* DependencyContainer.swift */,
 			);
 			path = SampleApp;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8E59D662741997B00F6C0B2 /* DependencyContainer.swift in Sources */,
 				B8E59D482738984D00F6C0B2 /* ViewController.swift in Sources */,
 				B8E59D58273899BA00F6C0B2 /* SearchViewModel.swift in Sources */,
 				B8E59D442738984D00F6C0B2 /* AppDelegate.swift in Sources */,

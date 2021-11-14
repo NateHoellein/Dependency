@@ -11,28 +11,16 @@ import Dependency
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    public var dependencyManager: DependencyManager?
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        DependencyContainer.shared.register(SearchViewModel.self, { manager in
+            return SearchViewModel()
+        }, "searchViewModel")
         
-        // Registration of dependencies.  How you implement this could vary. The DependencyManager class could b
-        // wrapped in a singleton.  In this example, to get something up and running, it's just a global variable.
-        // Definately not production ready quality
+        DependencyContainer.shared.register(APIProtocol.self, { manager in
+            return APIHandler()
+        }, "APIHandler")
         
-        dependencyManager = DependencyManager { manager in
-            
-            manager.register(SearchViewModel.self, { (_) -> SearchViewModel in
-                return SearchViewModel()
-            }, "searchViewModel")
-            
-            manager.register(APIProtocol.self, { (_) -> APIProtocol in
-                return APIHandler()
-            }, "APIHandler")
-            
-        }
-
         return true
     }
 

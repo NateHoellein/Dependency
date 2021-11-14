@@ -15,12 +15,7 @@ class ViewController: UIViewController {
     required init?(coder: NSCoder) {
         
         
-        // Will have to investigate why the force unwrap is necessary here.
-        
-        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        let manager = appDelegate.dependencyManager
-        self.viewModel = try! (manager?.resolve(SearchViewModel.self, label: "searchViewModel"))!
-        
+        self.viewModel = try! DependencyContainer.shared.resolve(SearchViewModel.self, label: "searchViewModel")
         
         fillerView = UIView(frame: .zero)
         fillerView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,19 +36,21 @@ class ViewController: UIViewController {
         }))
         searchButton.translatesAutoresizingMaskIntoConstraints = false
        
-        self.view.addSubview(searchBox)
-        self.view.addSubview(searchButton)
+        let searchStackView = UIStackView(arrangedSubviews: [searchBox, searchButton])
+        searchStackView.translatesAutoresizingMaskIntoConstraints = false
+        searchStackView.axis = .horizontal
+        searchStackView.distribution = .fillProportionally
+        
+        self.view.addSubview(searchStackView)
         self.view.addSubview(fillerView)
         
         self.view.addConstraints([
-            searchBox.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            searchBox.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            searchBox.trailingAnchor.constraint(equalTo: searchButton.leadingAnchor, constant: -10),
-            searchButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            searchButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            fillerView.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: -5),
-            fillerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            fillerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            searchStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            searchStackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            searchStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            fillerView.topAnchor.constraint(equalTo: searchStackView.bottomAnchor, constant: 5),
+            fillerView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            fillerView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             fillerView.heightAnchor.constraint(equalToConstant: 2)
         ])
     }

@@ -21,10 +21,10 @@ public class DependencyManager {
         let key = Key(type: type.self, label: label)
         let initBlock = dependencymap[key]
         guard let b = initBlock else {
-            throw DependencyError.RegistrationOfClassNotFound("Somethinge \(label)")
+            throw DependencyError.RegistrationOfClassNotFound("Could not find a registered instance of \(label)")
         }
         guard let bfunc = b(self) as? T else {
-            throw DependencyError.UnableToInvokeCreationClosure("Something 2 \(T.Type.self)")
+            throw DependencyError.UnableToInvokeCreationClosure("Could not initialize \(T.Type.self)")
         }
         return bfunc
     }
